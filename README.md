@@ -1,66 +1,65 @@
-# Kernel Driver for IMX294
+# Driver do Kernel para IMX294
 
-This guide provides detailed instructions on how to install the IMX294 kernel driver on a Linux system, specifically Raspbian.
+Este guia fornece instruções detalhadas sobre como instalar o driver do kernel IMX294 em um sistema Linux, especificamente o Raspbian.
 
-## Prerequisites
+## Pré-requisitos
 
-Before you begin the installation process, please ensure the following prerequisites are met:
+Antes de iniciar o processo de instalação, certifique-se de que os seguintes pré-requisitos sejam atendidos:
 
-- **Kernel version**: You should be running on a Linux kernel version 6.1 or newer. You can verify your kernel version by executing `uname -r` in your terminal.
+- **Versão do kernel**: você deve estar executando um kernel Linux versão 6.1 ou superior. Você pode verificar a versão do seu kernel executando `uname -r` no terminal.
 
-- **Development tools**: Essential tools such as `gcc`, `dkms`, and `linux-headers` are required for compiling a kernel module. If not already installed, these can be installed using the package manager with the following command:
-  
-   ```bash 
+- **Ferramentas de desenvolvimento**: ferramentas essenciais como `gcc`, `dkms` e `linux-headers` são necessárias para compilar um módulo do kernel. Se ainda não estiverem instaladas, elas podem ser instaladas com o gerenciador de pacotes usando o seguinte comando:
+
+   ```bash
    sudo apt install linux-headers dkms git
    ```
-   
-## Installation Steps
 
-### Setting Up the Tools
+## Etapas de instalação
 
-First, install the necessary tools (`linux-headers`, `dkms`, and `git`) if you haven't done so:
+### Configurando as ferramentas
 
-```bash 
+Primeiro, instale as ferramentas necessárias (`linux-headers`, `dkms` e `git`) caso ainda não as tenha:
+
+```bash
 sudo apt install linux-headers dkms git
 ```
 
-### Fetching the Source Code
+### Obtendo o código-fonte
 
-Clone the repository to your local machine and navigate to the cloned directory:
+Clone o repositório para a sua máquina local e navegue até o diretório clonado:
 
 ```bash
 git clone https://github.com/will127534/imx294-v4l2-driver.git
 cd imx294-v4l2-driver/
 ```
 
-### Compiling and Installing the Kernel Driver
+### Compilando e instalando o driver do kernel
 
-To compile and install the kernel driver, execute the provided installation script:
+Para compilar e instalar o driver do kernel, execute o script de instalação fornecido:
 
-```bash 
+```bash
 ./setup.sh
 ```
 
-### Updating the Boot Configuration
+### Atualizando a configuração de inicialização
 
-Edit the boot configuration file using the following command:
+Edite o arquivo de configuração de inicialização usando o seguinte comando:
 
 ```bash
 sudo nano /boot/config.txt
 ```
 
-In the opened editor, locate the line containing `camera_auto_detect` and change its value to `0`. Then, add the line `dtoverlay=imx294`. So, it will look like this:
+No editor aberto, localize a linha contendo `camera_auto_detect` e altere seu valor para `0`. Em seguida, adicione a linha `dtoverlay=imx294`. Assim, o arquivo ficará assim:
 
 ```
 camera_auto_detect=0
 dtoverlay=imx294
 ```
 
-After making these changes, save the file and exit the editor.
+Depois de fazer essas alterações, salve o arquivo e saia do editor.
 
-Remember to reboot your system for the changes to take effect.
+Lembre-se de reiniciar o sistema para que as alterações entrem em vigor.
 
+## Agradecimentos especiais
 
-## Special Thanks
-
-Special thanks to Sasha Shturma's Raspberry Pi CM4 Сarrier with Hi-Res MIPI Display project, the install script is adapted from the github project page: https://github.com/renetec-io/cm4-panel-jdi-lt070me05000
+Agradecimentos especiais ao projeto Raspberry Pi CM4 Carrier com Display MIPI de Alta Resolução de Sasha Shturma; o script de instalação foi adaptado a partir da página do projeto no GitHub: https://github.com/renetec-io/cm4-panel-jdi-lt070me05000
